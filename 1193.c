@@ -24,6 +24,7 @@ int main(){
 		lskip=0;
 
 		if(i==x) printf("%d",r);
+
 		if(r==1&&!rrepeat){
 			rreverse = 0;
 			rrepeat=1;
