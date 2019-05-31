@@ -5,11 +5,11 @@ sys.setrecursionlimit(100000)
 read = lambda: sys.stdin.readline().strip()
 
 class DFS:
-    visit = {}
-    history = []
 
     def __init__(self, graph):
         self.graph = graph
+        self.visit = {}
+        self.history = []
 
     def run(self, current):
         if self.visit.get(current) is not None:
@@ -27,11 +27,11 @@ class DFS:
         return self.history
 
 class BFS:
-    visit = {}
-    history = []
 
     def __init__(self, graph):
         self.graph = graph
+        self.visit = {}
+        self.history = []
 
     def run(self, start):
         q = Queue()
