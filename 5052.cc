@@ -8,34 +8,24 @@ using namespace std;
 bool isConsistence = 1;
 
 class Trie {
-	struct Trie *node[10];
-	bool initialized[10];
+	struct vector<Trie*> node;
 	int key;
 	bool isMatched;
 
 public:
 	Trie(int key) {
 		this->key = key;
-		for (int i = 0; i < 10; ++i) this->initialized[i] = false;
 		this->isMatched = 0;
+		this->node = vector<Trie*>(10, NULL);
 	}
-
-	~Trie() {
-		for (int i = 0; i < 10; ++i) {
-			if (this->initialized[i]) {
-				delete this->node[i];
-			}
-		}
-	}
-
+	
 	void find(string &str, int index) {
 		if (str.size() == index) {
 			return;
 		}
 
 		int cur = str[index] - '0';
-
-		if (!this->initialized[cur]) {
+		if (this->node[cur] == NULL) {
 			return;
 		}
 
@@ -48,9 +38,8 @@ public:
 
 	void insert(string &str, int index) {
 		int cur = str[index] - '0';
-		if (!this->initialized[cur]) {
+		if (this->node[cur] == NULL) {
 			this->node[cur] = new Trie(cur);
-			this->initialized[cur] = true;
 		}
 		if (str.size() == index + 1) {
 			this->node[cur]->isMatched = 1;
@@ -66,7 +55,7 @@ int main() {
 	while (t--) {
 		isConsistence = 1;
 		Trie* trie = new Trie(-1);
-		cin >> n;		
+		cin >> n;
 		vector<string> v(n);
 		for (int i = 0; i < n; ++i) {
 			cin >> v[i];
